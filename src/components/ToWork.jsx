@@ -10,6 +10,8 @@ import emailjs from "@emailjs/browser";
 
 function ToWork() {
   const form = useRef();
+
+
   const sendEmail = (e) => {
     e.preventDefault();
     toast.promise(
@@ -20,15 +22,17 @@ function ToWork() {
           form.current,
           "kp8eEeHKhFFzK_4G9"
         )
-        .then(
-          (result) => {
+        .then(result =>{
+           try{
             console.log(result.text);
             return result.text
-          },
-          (error) => {
+          }
+          catch(error) {
             console.log(error.text);
             return error.text
           }
+        }
+         
 
         ),
         {
@@ -56,13 +60,13 @@ function ToWork() {
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
-        rtl={false}
+       
         pauseOnFocusLoss
         draggable
-        pauseOnHover
+        pauseOnHover={false}
       />
 
-      <ToastContainer />
+ 
 
       <form ref={form} onSubmit={sendEmail} className="hidden">
         <label>Name</label>
