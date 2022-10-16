@@ -7,10 +7,11 @@ import { BiCheckCircle} from "react-icons/bi";
 
 
 import emailjs from "@emailjs/browser";
+import { useState } from "react";
 
 function ToWork() {
   const form = useRef();
-
+  const [text,setText] = useState("He abierto el taller, A trabajar " +new Date().toLocaleString('en-US'))
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -44,10 +45,10 @@ function ToWork() {
   };
 
   return (
-    <div className={tw("p-4 flex h-80 justify-center items-center  ")}>
+    <div className=" p-4 flex flex-col h-100 justify-center items-center gap-4 ">
       <button
         onClick={sendEmail}
-        className="p-8 text-gray-100 text-2xl w-30 flex justify-center flex-column items-center  bg-green-400 border-4 rounded-full   hover:(border-green-400 bg-transparent text-green-400) "
+        className="mt-8 p-8 text-gray-100 text-2xl w-30 flex justify-center flex-column items-center  bg-green-400 border-4 rounded-full   hover:(border-green-400 bg-transparent text-green-400) "
       >
         A trabajar
        <span className="p-1">
@@ -68,13 +69,13 @@ function ToWork() {
 
  
 
-      <form ref={form} onSubmit={sendEmail} className="hidden">
-        <label>Name</label>
-        <input type="text" value={`joel`} readOnly name="from_name" />
+      <form ref={form} onSubmit={sendEmail} className="flex flex-col justify-center items-center border-solid border-1  p-8">
+        <label className="hidden">Name</label>
+        <input type="text" className="hidden" value={`joel`} readOnly name="from_name" />
 
-        <label>Message</label>
-        <textarea name="message" readOnly value={"He abierto el taller, A trabajar " +new Date().toLocaleString('en-US')} />
-        <input type="submit" value="Send" />
+        <label className="p-4">si desea enviar un mensaje, escribalo aqui abajo</label>
+        <textarea name="message"  className="py-8 px-8 border-1 border-green-300" value={text} onChange={(e) => setText(e.target.value) }/>
+       
       </form>
     </div>
   );
